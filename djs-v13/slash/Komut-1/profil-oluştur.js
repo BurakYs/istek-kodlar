@@ -1,5 +1,5 @@
 const config = require("../../config.js")
-const { MessageEmbed, MessageActionRow, MessageButton} = require("discord.js")
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
 const { JsonDatabase } = require("wio.db");
 
 const db = new JsonDatabase({
@@ -81,10 +81,10 @@ module.exports = {
 
   run: async (client, interaction) => {
     if (!["Hetero", "Homo", "Bi", "Aseksüel"].includes(interaction.options.getString("yonelim"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Hetero/Homo/Bi/Aseksüel")] })
-    if (!["Müslüman", "Ateist", "Yahudi", "Hristiyan"].includes(interaction.options.getString("din")))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Müslüman/Ateist/Hristiyan/Yahudi")] })
+    if (!["Müslüman", "Ateist", "Yahudi", "Hristiyan"].includes(interaction.options.getString("din"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Müslüman/Ateist/Hristiyan/Yahudi")] })
     if (!["Erkek", "Kadın"].includes(interaction.options.getString("cinsiyet"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
     if (!["Polis Memuru", "Avukat", "Savcı", "Yargıç", "Doktor", "Psikolog", "Hemşire", "Mafya", "Çete"].includes(interaction.options.getString("meslek"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
-    if(db.get(`profil_${interaction.user.id}.ad`)) return interaction.reply({embeds: [client.errorEmbed.setDescription(`Zaten profilin var.`)]})
+    if (db.get(`profil_${interaction.user.id}.ad`)) return interaction.reply({ embeds: [client.errorEmbed.setDescription(`Zaten profilin var.`)] })
 
     db.set(`profil_${interaction.user.id}`, {
       ad: interaction.options.getString("ad"),
@@ -103,21 +103,22 @@ module.exports = {
     let cins = interaction.options.getString("cinsiyet")
     let meslek = interaction.options.getString("meslek")
     const filter = m => m.customId === "kabul" || "red"
-    const collector = interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").createMessageComponentCollector({filter, max: 1, time: 120000})
+    const collector = interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").createMessageComponentCollector({ filter, max: 1, time: 120000 })
     const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomId('kabul')
-					.setLabel('Kabul Et')
-					.setStyle('SUCCESS'),
-			).addComponents(
-				new MessageButton()
-					.setCustomId('red')
-					.setLabel('Reddet')
-					.setStyle('DANGER'),
-			);
-      interaction.reply({embeds: [client.defaultEmbed.setDescription(`Profiliniz yetkililere gönderildi. Kabul edildiğinde size dm'den ulaşılacak.`)]})
-    interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({content: "<@&Profil Kontrol Yetkili Rol ID>", embeds: [client.defaultEmbed.setDescription(`
+      .addComponents(
+        new MessageButton()
+          .setCustomId('kabul')
+          .setLabel('Kabul Et')
+          .setStyle('SUCCESS'),
+      ).addComponents(
+        new MessageButton()
+          .setCustomId('red')
+          .setLabel('Reddet')
+          .setStyle('DANGER'),
+      );
+    interaction.reply({ embeds: [client.defaultEmbed.setDescription(`Profiliniz yetkililere gönderildi. Kabul edildiğinde size dm'den ulaşılacak.`)] })
+    interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({
+      content: "<@&Profil Kontrol Yetkili Rol ID>", embeds: [client.defaultEmbed.setDescription(`
 **${interaction.user} profilini tamamlamak istiyor. Kabul ediyor musunuz?**
 
 :id: \`ID:\` \`${interaction.user.id}\`
@@ -132,12 +133,13 @@ module.exports = {
 :bust_in_silhouette: \`Kişisel Özellikler:\` \`${db.get(`profil_${interaction.user.id}.kisiselozellikler`)}\`
 :briefcase: \`Meslek:\` \`${db.get(`profil_${interaction.user.id}.meslek`)}\`
 
-    `)], components:[row]})
+    `)], components: [row]
+    })
 
     collector.on('collect', async (m) => {
       if (m.customId === 'kabul') {
-        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.successEmbed.setDescription("Kabul edildi")]})
-        interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")]}).catch(e => console.log(e))
+        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({ embeds: [client.successEmbed.setDescription("Kabul edildi")] })
+        interaction.channel.send({ content: `${interaction.user}`, embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")] }).catch(e => console.log(e))
         if (meslek === "Polis Memuru") { interaction.member.roles.add("Polis Memuru Rol ID") }
         if (meslek === "Avukat") { interaction.member.roles.add("Avukat Rol ID") }
         if (meslek === "Savcı") { interaction.member.roles.add("Savcı Rol ID") }
@@ -160,17 +162,17 @@ module.exports = {
         if (din === "Ateist") { interaction.member.roles.add("Ateist") }
 
 
-        
+
       } else if (m.customId === 'red') {
-        db.findAndDelete((element,db) => {
+        db.findAndDelete((element, db) => {
           return element.ID.includes(`profil_${interaction.user.id}`);
-          
-      });
-      interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.successEmbed.setDescription("Reddedildi")]})
-      interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz reddedildi.")]}).catch(e => console.log(e))
-   
+
+        });
+        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({ embeds: [client.successEmbed.setDescription("Reddedildi")] })
+        interaction.channel.send({ content: `${interaction.user}`, embeds: [client.defaultEmbed.setDescription("Profiliniz reddedildi.")] }).catch(e => console.log(e))
+
       }
-  });
+    });
 
   }
 };
