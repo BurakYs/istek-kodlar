@@ -96,6 +96,7 @@ module.exports = {
       din: interaction.options.getString("din"),
       yonelim: interaction.options.getString("yonelim"),
       kisiselozellikler: interaction.options.getString("kisisel-ozellikler"),
+      meslek: interaction.options.getString("meslek")
     })
     let din = interaction.options.getString("din")
     let yonelim = interaction.options.getString("yonelim")
