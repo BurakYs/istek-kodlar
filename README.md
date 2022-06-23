@@ -1,2 +1,2 @@
-# istek-kodlar
-İsteyen kişilere ücretsiz yaptığım tüm kodlar
+
+# İsteyen kişilere ücretsiz yaptığım tüm kodlar
