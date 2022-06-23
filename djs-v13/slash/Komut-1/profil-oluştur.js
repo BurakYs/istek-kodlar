@@ -130,6 +130,8 @@ module.exports = {
 :bust_in_silhouette: \`Cinsiyet:\` \`${db.get(`profil_${interaction.user.id}.cinsiyet`)}\`
 :couple_with_heart_woman_man: \`Cinsel Yönelimi:\` \`${db.get(`profil_${interaction.user.id}.yonelim`)}\`
 :bust_in_silhouette: \`Kişisel Özellikler:\` \`${db.get(`profil_${interaction.user.id}.kisiselozellikler`)}\`
+:briefcase: \`Meslek:\` \`${db.get(`profil_${interaction.user.id}.meslek`)}\`
+
     `)], components:[row]})
 
     collector.on('collect', async (m) => {
