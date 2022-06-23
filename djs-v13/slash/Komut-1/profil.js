@@ -27,7 +27,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 let user = interaction.options.getUser("kullanici") || interaction.user
-if(!db.get(`profil_${user.id}.ad`)) return interaction.reply({embeds: [client.errorEmbed.setDescription(`Kullanıcının profili yok.`)]})
+if(db.get(`profil_${user.id}.ad`) === false || db.get(`profil_${user.id}.ad`) === null || db.get(`profil_${user.id}.ad`) === undefined) return interaction.reply({embeds: [client.errorEmbed.setDescription(`Kullanıcının profili yok.`)]})
    await interaction.reply({embeds: [new MessageEmbed().setTitle(`${user.username} Kullanıcısının Profili`).setColor("#00CCFF")
    .setDescription(`
 
