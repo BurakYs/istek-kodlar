@@ -47,9 +47,9 @@ let yonelim = db.get(`profil_${user.id}.yonelim`)
         if (meslek === "Mafya") { member.roles.remove("Mafya Rol ID") }
         if (meslek === "Çete") { member.roles.remove("Çete Rol ID") }
         if (meslek === "Eskort") { member.roles.remove("Eskort Rol ID") }
-        if (yonelim === "Heteroseksüel") { member.roles.remove("Hetero Rol ID") }
-        if (yonelim === "Homoseksüel") { member.roles.remove("Homo Rol ID") }
-        if (yonelim === "Biseksüel") { member.roles.remove("Bi Rol ID") }
+        if (yonelim === "Hetero") { member.roles.remove("Hetero Rol ID") }
+        if (yonelim === "Homo") { member.roles.remove("Homo Rol ID") }
+        if (yonelim === "Bi") { member.roles.remove("Bi Rol ID") }
         if (yonelim === "Aseksüel") { member.roles.remove("Aseksüel Rol ID") }
         if (cins === "Erkek") { member.roles.remove("Erkek Rol ID") }
         if (cins === "Kadın") { member.roles.remove("Kadın Rol ID") }
