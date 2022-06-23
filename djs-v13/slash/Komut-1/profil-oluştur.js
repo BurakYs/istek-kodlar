@@ -102,7 +102,7 @@ module.exports = {
     let cins = interaction.options.getString("cins")
     let meslek = interaction.options.getString("meslek")
     const filter = m => m.customId === "kabul" || "red"
-    const collector = interaction.guild.channels.cache.get("989449275425562644").createMessageComponentCollector({filter, max: 1, time: 120000})
+    const collector = interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").createMessageComponentCollector({filter, max: 1, time: 120000})
     const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
