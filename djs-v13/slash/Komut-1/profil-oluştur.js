@@ -137,7 +137,7 @@ module.exports = {
     collector.on('collect', async (m) => {
       if (m.customId === 'kabul') {
         interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.successEmbed.setDescription("Kabul edildi")]})
-        interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")]});
+        interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")]}).catch(e => console.log(e))
         if (meslek === "Polis Memuru") { interaction.member.roles.add("Polis Memuru Rol ID") }
         if (meslek === "Avukat") { interaction.member.roles.add("Avukat Rol ID") }
         if (meslek === "Savcı") { interaction.member.roles.add("Savcı Rol ID") }
@@ -148,9 +148,9 @@ module.exports = {
         if (meslek === "Mafya") { interaction.member.roles.add("Mafya Rol ID") }
         if (meslek === "Çete") { interaction.member.roles.add("Çete Rol ID") }
         if (meslek === "Eskort") { interaction.member.roles.add("Eskort Rol ID") }
-        if (yonelim === "Heteroseksüel") { interaction.member.roles.add("Hetero Rol ID") }
-        if (yonelim === "Homoseksüel") { interaction.member.roles.add("Homo Rol ID") }
-        if (yonelim === "Biseksüel") { interaction.member.roles.add("Bi Rol ID") }
+        if (yonelim === "Hetero") { interaction.member.roles.add("Hetero Rol ID") }
+        if (yonelim === "Homo") { interaction.member.roles.add("Homo Rol ID") }
+        if (yonelim === "Bi") { interaction.member.roles.add("Bi Rol ID") }
         if (yonelim === "Aseksüel") { interaction.member.roles.add("Aseksüel Rol ID") }
         if (cins === "Erkek") { interaction.member.roles.add("Erkek Rol ID") }
         if (cins === "Kadın") { interaction.member.roles.add("Kadın Rol ID") }
@@ -158,8 +158,7 @@ module.exports = {
         if (din === "Müslüman") { interaction.member.roles.add("Müslüman") }
         if (din === "Yahudi") { interaction.member.roles.add("Yahudi") }
         if (din === "Ateist") { interaction.member.roles.add("Ateist") }
-        interaction.member.roles.add("Kayıtlı Rol ID")
-        interaction.member.roles.remove("Kayıtsız Rol ID")
+
 
         
       } else if (m.customId === 'red') {
@@ -168,7 +167,7 @@ module.exports = {
           
       });
       interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.successEmbed.setDescription("Reddedildi")]})
-      interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz reddedildi.")]});
+      interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz reddedildi.")]}).catch(e => console.log(e))
    
       }
   });
