@@ -73,7 +73,7 @@ module.exports = {
     },
   ],
 
-  requiredPermissions: ["ADMINISTRATOR"],
+  requiredPermissions: [],
   requiredPermissionsMe: [],
 
   disabled: false,
