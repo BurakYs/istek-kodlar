@@ -117,8 +117,8 @@ module.exports = {
 					.setStyle('DANGER'),
 			);
       interaction.reply({embeds: [client.defaultEmbed.setDescription(`Profiliniz yetkililere gönderildi. Kabul edildiğinde size dm'den ulaşılacak.`)]})
-    interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.defaultEmbed.setDescription(`
-**<@&Profil Kontrol Yetkili Rol ID> ${interaction.user} profilini tamamlamak istiyor. Kabul ediyor musunuz?**
+    interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({content: "<@&Profil Kontrol Yetkili Rol ID>", embeds: [client.defaultEmbed.setDescription(`
+**${interaction.user} profilini tamamlamak istiyor. Kabul ediyor musunuz?**
 
 :id: \`ID:\` \`${interaction.user.id}\`
 :id: \`Ad:\` \`${db.get(`profil_${interaction.user.id}.ad`)}\`
