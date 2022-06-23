@@ -136,7 +136,7 @@ module.exports = {
 
     collector.on('collect', async (m) => {
       if (m.customId === 'kabul') {
-        interaction.guild.channels.cache.get("989449275425562644").send({embeds: [client.successEmbed.setDescription("Kabul edildi")]})
+        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({embeds: [client.successEmbed.setDescription("Kabul edildi")]})
         interaction.user.send({ embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")]});
         if (meslek === "Polis Memuru") { interaction.member.roles.add("Polis Memuru Rol ID") }
         if (meslek === "Avukat") { interaction.member.roles.add("Avukat Rol ID") }
