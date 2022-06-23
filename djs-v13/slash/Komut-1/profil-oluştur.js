@@ -80,10 +80,10 @@ module.exports = {
   developerOnly: false,
 
   run: async (client, interaction) => {
-    if (!["Hetero", "Homo", "Bi", "Aseksüel"].includes(interaction.options.getString("yonelim").toLowerCase())) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Hetero/Homo/Bi/Aseksüel")] })
-    if (!["Müslüman", "Ateist", "Yahudi", "Hristiyan"].includes(interaction.options.getString("din").toLowerCase())) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Müslüman/Ateist/Hristiyan/Yahudi")] })
-    if (!["Erkek", "Kadın"].includes(interaction.options.getString("cinsiyet").toLowerCase())) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
-    if (!["Polis Memuru", "Avukat", "Savcı", "Yargıç", "Doktor", "Psikolog", "Hemşire", "Mafya", "Çete"].includes(interaction.options.getString("meslek").toLowerCase())) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
+    if (!["Hetero", "Homo", "Bi", "Aseksüel"].includes(interaction.options.getString("yonelim"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Hetero/Homo/Bi/Aseksüel")] })
+    if (!["Müslüman", "Ateist", "Yahudi", "Hristiyan"].includes(interaction.options.getString("din")))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Müslüman/Ateist/Hristiyan/Yahudi")] })
+    if (!["Erkek", "Kadın"].includes(interaction.options.getString("cinsiyet"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
+    if (!["Polis Memuru", "Avukat", "Savcı", "Yargıç", "Doktor", "Psikolog", "Hemşire", "Mafya", "Çete"].includes(interaction.options.getString("meslek"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
     if(db.get(`profil_${interaction.user.id}.ad`)) return interaction.reply({embeds: [client.errorEmbed.setDescription(`Zaten profilin var.`)]})
 
     db.set(`profil_${interaction.user.id}`, {
