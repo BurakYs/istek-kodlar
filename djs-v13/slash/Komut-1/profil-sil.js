@@ -30,7 +30,7 @@ module.exports = {
 let user = interaction.options.getUser("kullanici")
 if(interaction.member.roles.cache.has("Profil Kontrol Yetkili Rol ID")) return;
 
-let member = interaction.guild.members.cache.get(user)
+let member = interaction.guild.members.cache.get(user.id)
 let meslek = db.get(`profil_${user.id}.meslek`)
 let din = db.get(`profil_${user.id}.din`)
 let cins = db.get(`profil_${user.id}.cins`)
