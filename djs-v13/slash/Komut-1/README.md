@@ -3,10 +3,9 @@
 <h1>Kesinlikle değiştirilmesi gereken satırlar</h1>
 <h2>profil-oluştur.js</h2>
 <ul>
-<li>106</li>
-<li>120 (2 tane)</li>
-<li>139</li>
-<li138 ve 159 arası</li>
+<li>88</li>
+<li>89</li>
+<li144 ve 163 arası</li>
 <li>169</li>
 </ul>
 <h2>profil-sil.js</h2>
