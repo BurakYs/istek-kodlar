@@ -85,7 +85,8 @@ module.exports = {
     if (!["Erkek", "Kadın"].includes(interaction.options.getString("cinsiyet"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
     if (!["Polis Memuru", "Avukat", "Savcı", "Yargıç", "Doktor", "Psikolog", "Hemşire", "Mafya", "Çete"].includes(interaction.options.getString("meslek"))) return interaction.reply({ ephemeral: true, embeds: [client.errorEmbed.setDescription("Lütfen şu seçeneklerden birini girin: Erkek/Kadın")] })
     if (db.get(`profil_${interaction.user.id}.ad`)) return interaction.reply({ embeds: [client.errorEmbed.setDescription(`Zaten profilin var.`)] })
-
+    const profilkontrolkanal = "Profil Kontrol Kanal ID"
+    const profilkontrolyetkili = "Profil Kontrol Yetkili Rol ID"
     db.set(`profil_${interaction.user.id}`, {
       ad: interaction.options.getString("ad"),
       soyad: interaction.options.getString("soyad"),
@@ -102,8 +103,8 @@ module.exports = {
     let yonelim = interaction.options.getString("yonelim")
     let cins = interaction.options.getString("cinsiyet")
     let meslek = interaction.options.getString("meslek")
-    const filter = m => m.customId === "kabul" || "red"
-    const collector = interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").createMessageComponentCollector({ filter, max: 1, time: 120000 })
+    const filter = m => m.customId === "kabul" || m.customId === "red"
+    const collector = interaction.guild.channels.cache.get(profilkontrolkanal).createMessageComponentCollector({ filter, max: 1, time: 120000 })
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
@@ -117,8 +118,8 @@ module.exports = {
           .setStyle('DANGER'),
       );
     interaction.reply({ embeds: [client.defaultEmbed.setDescription(`Profiliniz yetkililere gönderildi. Kabul edildiğinde size dm'den ulaşılacak.`)] })
-    interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({
-      content: "<@&Profil Kontrol Yetkili Rol ID>", embeds: [client.defaultEmbed.setDescription(`
+    interaction.guild.channels.cache.get(profilkontrolkanal).send({
+      content: `<@&${profilkontrolyetkili}`, embeds: [client.defaultEmbed.setDescription(`
 **${interaction.user} profilini tamamlamak istiyor. Kabul ediyor musunuz?**
 
 :id: \`ID:\` \`${interaction.user.id}\`
@@ -138,7 +139,7 @@ module.exports = {
 
     collector.on('collect', async (m) => {
       if (m.customId === 'kabul') {
-        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({ embeds: [client.successEmbed.setDescription("Kabul edildi")] })
+        interaction.guild.channels.cache.get(profilkontrolkanal).send({ embeds: [client.successEmbed.setDescription("Kabul edildi")] })
         interaction.channel.send({ content: `${interaction.user}`, embeds: [client.defaultEmbed.setDescription("Profiliniz kabul edildi.")] }).catch(e => console.log(e))
         if (meslek === "Polis Memuru") { interaction.member.roles.add("Polis Memuru Rol ID") }
         if (meslek === "Avukat") { interaction.member.roles.add("Avukat Rol ID") }
@@ -157,9 +158,9 @@ module.exports = {
         if (cins === "Erkek") { interaction.member.roles.add("Erkek Rol ID") }
         if (cins === "Kadın") { interaction.member.roles.add("Kadın Rol ID") }
         if (din === "Hristiyan") { interaction.member.roles.add("Hristiyan Rol ID") }
-        if (din === "Müslüman") { interaction.member.roles.add("Müslüman") }
-        if (din === "Yahudi") { interaction.member.roles.add("Yahudi") }
-        if (din === "Ateist") { interaction.member.roles.add("Ateist") }
+        if (din === "Müslüman") { interaction.member.roles.add("Müslüman Rol ID") }
+        if (din === "Yahudi") { interaction.member.roles.add("Yahudi Rol ID") }
+        if (din === "Ateist") { interaction.member.roles.add("Ateist Rol ID") }
 
 
 
@@ -168,7 +169,7 @@ module.exports = {
           return element.ID.includes(`profil_${interaction.user.id}`);
 
         });
-        interaction.guild.channels.cache.get("Profil Kontrol Kanal ID").send({ embeds: [client.successEmbed.setDescription("Reddedildi")] })
+        interaction.guild.channels.cache.get(profilkontrolkanal).send({ embeds: [client.successEmbed.setDescription("Reddedildi")] })
         interaction.channel.send({ content: `${interaction.user}`, embeds: [client.defaultEmbed.setDescription("Profiliniz reddedildi.")] }).catch(e => console.log(e))
 
       }
@@ -176,4 +177,3 @@ module.exports = {
 
   }
 };
-
