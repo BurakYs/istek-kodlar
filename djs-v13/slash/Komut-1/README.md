@@ -10,5 +10,5 @@
 </ul>
 <h2>profil-sil.js</h2>
 <ul>
-<li>24 ve 43 arası</li>
+<li>26 ve 45 arası</li>
 </ul>
