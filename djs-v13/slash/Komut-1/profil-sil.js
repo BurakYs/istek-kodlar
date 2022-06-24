@@ -15,7 +15,7 @@ module.exports = {
         },
     ],
     requiredPermissions: [],
-    requiredPermissionsMe: [],
+    requiredPermissionsMe: ["MANAGE_ROLES"],
     disabled: false,
     developerOnly: false,
     run: async (client, interaction) => {
