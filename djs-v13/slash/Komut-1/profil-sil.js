@@ -19,6 +19,8 @@ module.exports = {
     disabled: false,
     developerOnly: false,
     run: async (client, interaction) => {
+    const profilkontrolyetkili = "Profil Kontrol Yetkili Rol ID"
+    if(!interaction.member.roles.cache.has(profilkontrolyetkili)) return;
         let user = interaction.options.getUser("kullanici")
         let member = interaction.guild.members.cache.get(user.id)
         member.roles.remove("Yargıç Rol ID")
